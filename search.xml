@@ -4,25 +4,6 @@
   
     
     <entry>
-      <title>About/关于</title>
-      <link href="/about/"/>
-      <url>/about/</url>
-      
-        <content type="html"><![CDATA[<h1 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me"></a>About Me</h1><p><img src="/images/favicon.ico">小锌翼翼</p><p>🔗  <a href="https://i.1ove.icu/">i.1ove.icu</a></p><p><a href="http://1ove.icu/">❤️叮当网络</a></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 灌水 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hello World</title>
       <link href="/hexo/"/>
       <url>/hexo/</url>
