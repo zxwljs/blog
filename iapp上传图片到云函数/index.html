@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="renderer" content="webkit">
+
+  
+  <title>iapp上传图片到云函数 | 小锌翼翼</title>
+
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  <meta name="keywords" content="">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="theme-color" content="#9C27B0">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="小锌翼翼">
+  <meta name="msapplication-starturl" content="https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/">
+  <meta name="msapplication-navbutton-color" content="#9C27B0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="小锌翼翼">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/images/favicon.ico">
+
+  
+    <link rel="canonical" href="https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/">
+  
+
+  
+<link rel="stylesheet" href="/css/mdui.css">
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/custom.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+  <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(!a){document.getElementsByTagName("body")[0].className+=" mdui-drawer-body-left"};</script>
+  <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
+  <div class="mdui-toolbar mdui-color-theme">
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
+    <a href="/" class="mdui-typo-headline">小锌翼翼</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a> -->
+    
+  </div>
+</header>
+<div class="mdui-dialog" id="search">
+  
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://i.1ove.icu"></form>
+    <div class="search-result"></div>
+  
+</div>
+  <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
+  <div class="mdui-grid-tile">
+    <img src="/images/banner.png" style="height: 160px;">
+    <img src="/images/banznx.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <div class="mdui-grid-tile-actions">
+      <div class="mdui-grid-tile-text">
+        <div class="mdui-grid-tile-title">Zn</div>
+        <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>✨GoodLuck To You</div>
+      </div>
+      
+        <div class="mdui-grid-tile-buttons">
+          <a href="mailto:banznx@qq.com" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'banznx@qq.com'}"><i class="mdui-icon material-icons">email</i></a>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    <a href="/" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+      <div class="mdui-list-item-content">主页</div>
+    </a>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">archive</i>
+        <div class="mdui-list-item-content">归档</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        <a class="mdui-ripple sidebar_archives-link" href="/archives/2021/11/">十一月 2021<span class="mdui-ripple sidebar_archives-count">2</span></a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">class</i>
+        <div class="mdui-list-item-content">分类</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">分类为空</a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">bookmark</i>
+        <div class="mdui-list-item-content">标签</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">标签为空</a>
+        
+      </div>
+    </div>
+    <a href="/about" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+      <div class="mdui-list-item-content">关于</div>
+    </a>
+  </div>
+
+  <div class="mdui-divider"></div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    
+      <a target="_blank" rel="noopener" href="//api.1ove.icu" class="mdui-list-item mdui-ripple">🧬叮当API</a>
+    
+      <a target="_blank" rel="noopener" href="//v.1ove.icu" class="mdui-list-item mdui-ripple">🎨叮当推荐</a>
+    
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <div class="mdui-list-item-content">友情链接</div>
+        <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+          <a href="//1ove.icu" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">❤️叮当网络</a>
+        
+          <a href="//github.com/zxwljs" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">🌌Github</a>
+        
+          <a href="https://console.cloud.tencent.com/" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">🗃️Console</a>
+        
+        
+      </div>
+    </div>
+  </div>
+</aside>
+  <main id="main" class="mdui-m-t-5 fadeIn animated">
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
+  <article class="mdui-card mdui-m-b-5">
+    <header class="mdui-card-media">
+      <img src="/images/random/material-14.png" style="max-height: 240px;">
+      <div class="mdui-card-media-covered">
+        <div class="mdui-card-primary">
+          <div class="mdui-card-primary-title">iapp上传图片到云函数</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2021-11-15 / <i class="iconfont">&#xe601;</i> Zn</div>
+        </div>
+      </div>
+      <div class="mdui-card-menu">
+        
+          <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#qrcode', align: 'right'}"><i class="mdui-icon material-icons">devices</i></button>
+          <ul class="mdui-menu" id="qrcode">
+            
+            <li class="mdui-menu-item" disabled>
+                <img src="https://api.pwmqr.com/qrcode/create/?url=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/}">
+				<center><text>手机查看</text></center>
+            </li>
+          </ul>
+        
+        
+          <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
+          <ul class="mdui-menu" id="share_menu">
+            <li class="mdui-menu-item">
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=iapp上传图片到云函数&url=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/&pic=https://i.1ove.icu/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://twitter.com/intent/tweet?text=iapp上传图片到云函数&url=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/&via=Zn" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=小锌翼翼&title=iapp上传图片到云函数&pics=https://i.1ove.icu/images/favicon.ico&url=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://telegram.me/share/url?url=https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/&text=iapp上传图片到云函数" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+            </li>
+          </ul>
+        
+      </div>
+    </header>
+    <div class="mdui-card-content mdui-typo">
+      <h1 id="iapp上传图片到腾讯云函数"><a href="#iapp上传图片到腾讯云函数" class="headerlink" title="iapp上传图片到腾讯云函数"></a>iapp上传图片到腾讯云函数</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>原理：使用iapp对图片进行Base64编码然后上传到腾讯云API网关触发云函数事件</p>
+<h2 id="1-iapp对图片进行base64处理"><a href="#1-iapp对图片进行base64处理" class="headerlink" title="1.iapp对图片进行base64处理"></a>1.iapp对图片进行base64处理</h2><h3 id="使用httpbin-org对图片数据进行处理"><a href="#使用httpbin-org对图片数据进行处理" class="headerlink" title="使用httpbin.org对图片数据进行处理"></a>使用httpbin.org对图片数据进行处理</h3><h4 id="事件代码"><a href="#事件代码" class="headerlink" title="事件代码"></a>事件代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t()</span><br><span class="line">&#123;</span><br><span class="line">  s api = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line">  <span class="comment">// 因为huf函数使用post请求所以要使用httpbin post链接</span></span><br><span class="line">  s file = <span class="string">&quot;/storage/emulated/0/Pictures/WeiXin/1.jpg&quot;</span></span><br><span class="line">  <span class="comment">// 图片本地地址 如无法上传 使用%代替/storage/emulated/0/</span></span><br><span class="line">  s type = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line">  <span class="comment">// 编码</span></span><br><span class="line">  huf(api, <span class="string">&quot;&quot;</span> , file, type, e)</span><br><span class="line">  syso(e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;args&quot;</span>: &#123;&#125;,</span><br><span class="line">	<span class="attr">&quot;data&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;files&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;file&quot;</span>: <span class="string">&quot;data:image/jpeg;base64,图片数据&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">&quot;form&quot;</span>: &#123;&#125;,</span><br><span class="line">	<span class="attr">&quot;headers&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;Charset&quot;</span>: <span class="string">&quot;utf-8&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;Content-Length&quot;</span>: <span class="string">&quot;121&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;Content-Type&quot;</span>: <span class="string">&quot;multipart/form-data;boundary=******&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;Host&quot;</span>: <span class="string">&quot;httpbin.org&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;User-Agent&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;X-Amzn-Trace-Id&quot;</span>: <span class="string">&quot;Root=1-6191e183-110116c866c95ea842fa6c2a&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">&quot;json&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">	<span class="attr">&quot;origin&quot;</span>: <span class="string">&quot;IP地址&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="云函数接收数据"><a href="#云函数接收数据" class="headerlink" title="云函数接收数据"></a>云函数接收数据</h3><h4 id="Python3-6"><a href="#Python3-6" class="headerlink" title="Python3.6"></a>Python3.6</h4><h5 id="进入控制台新建云函数"><a href="#进入控制台新建云函数" class="headerlink" title="进入控制台新建云函数"></a>进入<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/">控制台</a><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/list-create">新建云函数</a></h5><p><img src="https://i.loli.net/2021/11/15/KAdfrXO5InJ3DiE.png" alt="image.png"></p>
+<h5 id="创建API网关触发"><a href="#创建API网关触发" class="headerlink" title="创建API网关触发"></a>创建API网关触发</h5><p>注意要<strong>不要</strong>勾选集成响应 否则下面的代码运行后会显示错误</p>
+<p><img src="https://i.loli.net/2021/11/15/Xz43ibgGr716aQY.png" alt="image.png"></p>
+<h5 id="云函数Python处理图片代码"><a href="#云函数Python处理图片代码" class="headerlink" title="云函数Python处理图片代码"></a>云函数Python处理图片代码</h5><p>这里的return没有使用集成响应的格式，如果勾选了集成响应会显示错误，集成响应的格式在官方文档的云函数API网关触发可以看到。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf8 -*-</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main_handler</span>(<span class="params">event, context</span>):</span></span><br><span class="line">    <span class="comment"># 处理传入的数据</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        body = event[<span class="string">&#x27;body&#x27;</span>]</span><br><span class="line">        data = json.loads(body)</span><br><span class="line">        file = data[<span class="string">&#x27;files&#x27;</span>][<span class="string">&#x27;file&#x27;</span>] <span class="comment">#文件</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="string">&quot;code&quot;</span>:<span class="number">500</span>,</span><br><span class="line">            <span class="string">&quot;msg&quot;</span>:<span class="string">&quot;文件为空&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 判断是否图片base64数据</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        img = re.sub(<span class="string">r&#x27;data:image/(jpeg|png|gif);base64,&#x27;</span>,<span class="string">&#x27;&#x27;</span>,file)<span class="comment">#去除文件类型</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="string">&quot;code&quot;</span>:<span class="number">501</span>,</span><br><span class="line">            <span class="string">&quot;msg&quot;</span>:<span class="string">&quot;这不是一张图片&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 写入到图片</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        imgdata = base64.b64decode(img)</span><br><span class="line">        file_path  = <span class="string">&#x27;/tmp/test.jpg&#x27;</span></span><br><span class="line">        fo = <span class="built_in">open</span>(file_path,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">        fo.write(imgdata)</span><br><span class="line">        fo.close()</span><br><span class="line">        <span class="comment"># 图片保存成功 云函数可以操作/tmp目录</span></span><br><span class="line">        <span class="comment"># 这里执行你的逻辑</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="string">&quot;code&quot;</span>:<span class="number">502</span>,</span><br><span class="line">            <span class="string">&quot;msg&quot;</span>:<span class="string">&quot;服务器保存图片错误&quot;</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取API网关访问路径"><a href="#获取API网关访问路径" class="headerlink" title="获取API网关访问路径"></a>获取API网关访问路径</h5><p><img src="https://i.loli.net/2021/11/15/jlh59bn2NqAIuYa.png" alt="image.png"></p>
+<h3 id="iapp上传httpbin的回调数据到云函数"><a href="#iapp上传httpbin的回调数据到云函数" class="headerlink" title="iapp上传httpbin的回调数据到云函数"></a>iapp上传httpbin的回调数据到云函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">t()</span><br><span class="line">&#123;</span><br><span class="line">  s api = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line">  s tapi =<span class="string">&quot;https://iapi.1ove.icu/release/i-up-up&quot;</span></span><br><span class="line">  <span class="comment">//api网关的地址</span></span><br><span class="line">  s file = <span class="string">&quot;/storage/emulated/0/Pictures/WeiXin/1.jpg&quot;</span></span><br><span class="line">  <span class="comment">//上传的文件</span></span><br><span class="line">  s type = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line">  <span class="comment">//上传到httpbin 传入 参数e</span></span><br><span class="line">  huf(api, <span class="string">&quot;&quot;</span> , file, type, e)</span><br><span class="line">  <span class="comment">//上传 参数e 到云函数</span></span><br><span class="line">  hs(tapi,e,type,ee)</span><br><span class="line">  <span class="comment">//ee 结果</span></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <blockquote>
+        
+          <strong><a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" href="_blank"> CC BY-NC-SA 4.0 </a></strong><br>
+        
+        <strong>本文链接：</strong><br><a href="https://i.1ove.icu/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/">https://i.1ove.icu/iapp上传图片到云函数/</a>
+      </blockquote>
+    </div>
+    <footer class="mdui-card-actions">
+      
+      
+    </footer>
+    
+  </article>
+  
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+  <script>$("#main article .mdui-card-content img.fancybox").on("click",function(e){$.fancybox.open({src:$(this).attr("src")});});</script>
+
+
+  <nav id="paginator">
+    
+    <div class="spacer"></div>
+    
+      <a rel="next" class="extend next" href="/hexo/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Hello World'}">下一篇</span>
+        <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
+      </a>
+    
+  </nav>
+
+
+
+</main>
+  <div class="mdui-m-t-5 mdui-p-y-1 mdui-color-theme">
+	<div class="mdui-p-y-0 mdui-text-center">
+	  
+	  
+	  
+	    <small><a href="/images/banznx.jpg" target="_blank" class="mdui-btn mdui-btn-icon "><i class="mdui-icon iconfont">&#xe6e1;</i></a></small>
+	  
+		  <div id="jinrishici-sentence" class="mdui-typo-caption mdui-m-t-1">正在加载....</div><br>
+		  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+	</div>
+</div>
+<footer id="footer" class=" mdui-color-theme">
+  <div class="mdui-p-y-1 mdui-text-center mdui-typo mdui-text-color-grey-300">
+    <a target="_blank" rel="noopener" href="//1ove.icu" href="_blank">叮当网络</a>❤️2021 - 2021 <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme by <a href="https://github.com/niemingzhao/niemingzhao.github.io/tree/theme" target="_blank">default</a><br>
+	
+    
+	<br>
+  </div>
+</footer>
+<script>
+// 百度推送
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
+  
+  
+<script src="/js/mdui.js"></script>
+<script src="/js/script.js"></script>
+
+  
+<script src="/custom.js"></script>
+
+</body>
+</html>
