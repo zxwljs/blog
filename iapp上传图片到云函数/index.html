@@ -163,7 +163,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-14.png" style="max-height: 240px;">
+      <img src="/images/random/material-13.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">iapp上传图片到云函数</div>
@@ -221,7 +221,7 @@
 <h2 id="iapp上传httpbin的回调数据到云函数"><a href="#iapp上传httpbin的回调数据到云函数" class="headerlink" title="iapp上传httpbin的回调数据到云函数"></a>iapp上传httpbin的回调数据到云函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">t()</span><br><span class="line">&#123;</span><br><span class="line">  s api = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line">  s tapi =<span class="string">&quot;https://iapi.1ove.icu/release/i-up-up&quot;</span></span><br><span class="line">  <span class="comment">//api网关的地址(这是我的写的图床接口，大家可以使用)</span></span><br><span class="line">  s file = <span class="string">&quot;/storage/emulated/0/Pictures/WeiXin/1.jpg&quot;</span></span><br><span class="line">  <span class="comment">//上传的文件</span></span><br><span class="line">  s type = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line">  <span class="comment">//上传到httpbin 传入 参数e</span></span><br><span class="line">  huf(api, <span class="string">&quot;&quot;</span> , file, type, e)</span><br><span class="line">  <span class="comment">//上传 参数e 到云函数</span></span><br><span class="line">  hs(tapi,e,type,ee)</span><br><span class="line">  <span class="comment">//ee 结果</span></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><a target="_blank" rel="noopener" href="https://gitee.com/zxwljs/code-base/blob/master/iApp/iapp%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%BA%91%E5%87%BD%E6%95%B0-%E5%8F%AE%E5%BD%93%E6%95%B0%E6%8D%AE.iApp">下载</a></p>
-<p>如文件失效可联系邮箱<a href="mailto:&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#49;&#111;&#118;&#101;&#x2e;&#105;&#99;&#x75;">&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#49;&#111;&#118;&#101;&#x2e;&#105;&#99;&#x75;</a>或加入QQ群</p>
+<p>如文件失效可联系邮箱<a href="mailto:&#97;&#100;&#109;&#x69;&#110;&#64;&#49;&#111;&#118;&#x65;&#x2e;&#x69;&#99;&#x75;">&#97;&#100;&#109;&#x69;&#110;&#64;&#49;&#111;&#118;&#x65;&#x2e;&#x69;&#99;&#x75;</a>或加入QQ群</p>
 <h2 id="Blog：i-1ove-icu"><a href="#Blog：i-1ove-icu" class="headerlink" title="Blog：i.1ove.icu"></a>Blog：<a href="https://i.1ove.icu/">i.1ove.icu</a></h2>
       
       <blockquote>
